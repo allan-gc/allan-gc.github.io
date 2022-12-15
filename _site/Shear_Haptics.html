@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Davin Landry -Shear Haptics</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Davin Landry</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Projects</a></li>
+							<li><a href="Resume.html">Resume</a></li>
+							<li><a href="About.html">About Me</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/davinlandry/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/dlandry97" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Shear<br />
+									Haptics</h1>
+								</header>
+								<span class="image fit"><img src="assets/ShearHaptics/dual_controllers_cropped.jpg" alt="" /></span>
+
+								<!-- Text stuff -->
+									<!-- <h2>Text</h2>
+									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
+									Finally, this is a <a href="#">link</a>.</p> -->
+									<h2>overview</h2>
+                                    <p>The two main portions of this project include the design the mechanical structure of the device, and the integration of the haptic feedback with a virtual environment. </p>
+
+                                    <h2>Prototyping</h2>
+
+                                    <p>My goal for the design was to use few actuators to create shear movment about the grips of the controllers while keeping the device handheld and non-invasive. To achieve the linear motion of the grips, I considered many actuation schemes such as; linear actuators, worm gears, gears, belt drives. I decided to use a timing belt system actuated by a single high torque servo motor. The belt driven system gives the advantage of displacing the motor location away from the handle while still achieving strong linear force through the grips. The timing belt attaches to a set of carts guided by steel shaft rails. These shafts would function as a skeletal structure of the device as well as guide the grips in a linear path up and down the device. The second prototype increases efficiency and confort by slimming down the size of the mechanism while increasing the size of the grips.</p>
+									
+                                    <h3>Prototypes</h3>
+                                    <div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><img src="assets/ShearHaptics/prototype1.gif" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="assets/ShearHaptics/prototype2upright.gif" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="assets/ShearHaptics/prototype3.gif" alt="" /></span></div>
+										</div>
+									</div>
+
+
+                                    <h2>Actuation</h2>
+                                    <p>The actuation of the device is provided by a single 35kg/cm servo motor controlled by an arduino uno microcontroller. The servo drives a timing belt that attaches to and drives the grips. Each grip is designed to have a -10mm to 10mm travel range.
+                                        I mounted and tested othe motor types. Using a stepper motor provided a decent amount of speed to the grip movement, but did not provide nearly enough torque to create a haptic feel. A brushed DC motor was tested and proved that it could provide torque, but did not have a sufficient ammount of speed or control for rapid testing. I added a belt gear drive to the servo system in attempt to increase its speed but keep a decent amount of torque, but the servo would stall from resistance torque from the grip. 
+                                    </p>
+
+                                    <h2>Tracking</h2>
+                                    <p>To impliment tracking for the haptic device, I 3D printed a mount to hold an oculus rift touch controller to the top of the haptic controller.</p>
+
+									<h2>Interfacing</h2>
+									<p>I used Unity game enigne to create a VR demo environemnt to integrate with the device. I'm using serial communication to read and write signals from Unity to the arduino to sync up to impacts in VR to the haptic feedback of the controller. I use Unity to design a VR sword that I can track the velocity data and collision status to determine the type of collision and send the appropriate status flags to the arduino to actuate the motor in the controller. </p>
+
+									<span class="image fit"><img src="assets/ShearHaptics/VR.gif" alt="" />
+
+									<h2>In action</h2>
+									<div class="box alt">
+                                        <div class="row gtr-50 gtr-uniform">
+                                            <div class="col-6"><p>Here is a clip of my project in action at The Museum of Science and Industry during Robot Block Party. Here, visitors of Chicago MSI get to see and experience robotics projects built by students from local Universities. I got to field test my VR swordfighting demo with visitors all day, gathering feedback from civilian perspectives and learning the robustness of the mechanisms of the device.   </p></div>
+                                            <div class="col-6"><iframe width="720" height="1080" src="assets/ShearHaptics/MSI.gif" title="MSI Video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                            <!-- <div class="col-6"><span class="image fit"><img src="assets/IHMC/FEA3.png" alt="" /></span></div>
+                                            <div class="col-6"><span class="image fit"><img src="assets/IHMC/FEA4.png" alt="" /></span></div> -->
+                                        </div>
+                                    </div>
+
+									<!-- <p>Here is a clip of my project in action at The Museum of Science and Industry during Robot Block Party. </p>
+									<iframe  src="assets/ShearHaptics/MSI_Video.mp4" title="MSI Video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  -->
+
+
+									<h4>Instructions on how to use this project on the github page below.</h4>
+
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section>
+						<header id="header">
+							<a href="https://github.com/dlandry97/Shear_Haptics" class="logo">View on Github</a>
+						</header>
+					</section>
+				</footer>
+
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Davin Landry</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
