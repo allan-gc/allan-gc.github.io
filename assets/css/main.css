@@ -2656,10 +2656,18 @@ input, select, textarea {
 
 		.image.fit2 {
 			display: block;
-			margin: 0 0 0 12rem;
+			margin: 0 12rem;
 			width: 60%;
 			
 		}
+
+			.image.fit2:first-child {
+				margin-top: 0;
+			}
+
+			.image.fit2 img {
+				width: 100%;
+			}
 
 		.image.fit {
 			display: block;
