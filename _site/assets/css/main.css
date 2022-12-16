@@ -2654,11 +2654,17 @@ input, select, textarea {
 			top: 0.75rem;
 		}
 
-		.image.fit {
+		.image.fit2 {
 			display: block;
 			margin: 0 0 0 12rem;
 			width: 60%;
 			
+		}
+
+		.image.fit {
+			display: block;
+			margin: 2.5rem 0;
+			width: 100%;
 		}
 
 			.image.fit:first-child {
