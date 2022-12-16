@@ -2638,7 +2638,8 @@ input, select, textarea {
 		.image.center {
 			float: center;
 			margin: 0 0 1.5rem 14rem;
-			top: 0.4rem;
+			/* top: 0.4rem; */
+			width: 100%;
 		}
 
 		.image.center2 {
@@ -2655,8 +2656,8 @@ input, select, textarea {
 
 		.image.fit {
 			display: block;
-			margin: 2.5rem 0;
-			width: 100%;
+			margin: 0 0 0 12rem;
+			width: 60%;
 			
 		}
 
