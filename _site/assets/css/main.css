@@ -2595,19 +2595,65 @@ input, select, textarea {
 	
 	}
 
-		.video.center {
-			float: center;
-			margin: -4rem 0 0 9rem;
+		.video.fit {
+			/* float: center; */
+			/* margin: -4rem 0 0 9rem; */
 			/* top: 0.4rem; */
-			width: 100%;
+			/* width: 100%; */
+
+			display: block;
+			margin: 0 9rem;
+			width: 60%;
 		}
 
-		.video.center2 {
-			float: center;
+			.video.fit:first-child {
+				margin-top: 0;
+			}
+
+			.video.fit img {
+				width: 100%;
+			}
+
+		.video.fit2 {
+			/* float: center;
 			margin: 0 0 0.5rem 9rem;
 			/* top: 0.4rem; */
-			width: 100%;
+			/* width: 100%;  */
+
+
+			display: block;
+			margin: 0 8rem;
+			width: 60%;
 		}
+
+			.video.fit2:first-child {
+				margin-top: 0;
+			}
+
+			.video.fit2 img {
+				width: 100%;
+			}
+
+		/* .image.fit2 {
+			display: block;
+			margin: 0 12rem;
+			width: 60%;
+			
+		}
+
+			.image.fit2:first-child {
+				margin-top: 0;
+			}
+
+			.image.fit2 img {
+				width: 100%;
+			} */
+
+	.image.fit {
+		display: block;
+		margin: 2.5rem 0;
+		width: 100%;
+	}
 /* Image */
 
 	.image {
