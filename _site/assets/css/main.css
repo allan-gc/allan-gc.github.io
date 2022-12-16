@@ -2598,13 +2598,15 @@ input, select, textarea {
 		.video.center {
 			float: center;
 			margin: -4rem 0 0 9rem;
-			top: 0.4rem;
+			/* top: 0.4rem; */
+			width: 100%;
 		}
 
 		.video.center2 {
 			float: center;
 			margin: 0 0 0.5rem 9rem;
-			top: 0.4rem;
+			/* top: 0.4rem; */
+			width: 100%;
 		}
 /* Image */
 
