@@ -2602,15 +2602,15 @@ input, select, textarea {
 			/* width: 100%; */
 
 			display: block;
-			margin: 0 9rem;
-			width: 60%;
+			margin: 0 5rem;
+			width: 80%;
 		}
 
 			.video.fit:first-child {
 				margin-top: 0;
 			}
 
-			.video.fit img {
+			.video.fit video {
 				width: 100%;
 			}
 
@@ -2622,15 +2622,15 @@ input, select, textarea {
 
 
 			display: block;
-			margin: 0 8rem;
-			width: 60%;
+			margin: 0 2rem;
+			width: 90%;
 		}
 
 			.video.fit2:first-child {
 				margin-top: 0;
 			}
 
-			.video.fit2 img {
+			.video.fit2 video {
 				width: 100%;
 			}
 
