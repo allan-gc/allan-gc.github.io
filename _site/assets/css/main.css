@@ -2602,8 +2602,8 @@ input, select, textarea {
 			/* width: 100%; */
 
 			display: block;
-			margin: 0 5rem;
-			width: 80%;
+			margin: 0 4rem;
+			width: 90%;
 		}
 
 			.video.fit:first-child {
@@ -2634,20 +2634,6 @@ input, select, textarea {
 				width: 100%;
 			}
 
-		/* .image.fit2 {
-			display: block;
-			margin: 0 12rem;
-			width: 60%;
-			
-		}
-
-			.image.fit2:first-child {
-				margin-top: 0;
-			}
-
-			.image.fit2 img {
-				width: 100%;
-			} */
 
 	.image.fit {
 		display: block;
