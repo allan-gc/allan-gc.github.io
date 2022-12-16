@@ -41,41 +41,55 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>Pincher Arm Pen Detection <br />
+									<h1> Robotic Pen Tracker <br />
 									</h1>
 								</header>
-                                <span class="image center2"><img src="assets/PenChallenge/PenChallenge.gif" alt="" width="800" height="450" /></span>
+                                <!-- <span class="image center2"><img src="assets/PenChallenge/PenChallenge.gif" alt="" width="800" height="450" /></span> -->
+								<span class="video center2"><video width="800" height="450" controls autoplay muted loop src="assets/PenChallenge/PenChallenge.mp4" type="video/mp4"></span>
+
+
+
 
 								<!-- Text stuff -->
 								   <h2>Overview</h2>
                                    <p>
-									 For this project, 
+									 For this project, I used an Intel RealSense camera to detect the location of a pen and then had a PincherX100 
+									 robotic arm retrieve it. I used the RealSense and OpenCv Python packages for the computer vision algorithm, 
+									 and the InterbotixManipulatorXS package to control the Pincher robotic arm joint angles. 
 								   </p>
-                                    <h2> Computer Vision for Pen Detection </h2>
-                                    <p> Black and White Mask </p>
 
-                                    <h2> Centroid Detection </h2>
+
+                                    <h2> Computer Vision algorithm </h2>
+			
+                                    <p> To detect location of the purple pen I first created an HSV mask to filter out all other colors within a threshold. I then found
+										contours around the masked image of the pen, and added them to the original color image. Finally, I calculated the centroid 
+										of the pen by using the area of the largest countour currently in frame. To better detect the pen, I added a depth filter to 
+										my algorithm such that anything purple that was detected in the background would not be used for centroid calculation. The centroid 
+										was then used as the goal pose for the Pincher robotic arm's end effector.
+									 </p>
+
+									
+									<h3> HSV Mask </h3>
+									<span class="video center"><video width="800" height="500" controls autoplay loop src="assets/PenChallenge/PEN_BW_FILTER.webm" type="video/webm"></span>
+
+                                    <h3> Centroid Detection </h3>
+									<span class="video center"><video width="800" height="500" controls autoplay loop src="assets/PenChallenge/PEN_CENTROID.webm" type="video/webm"></span>
+
+									<p><a href="https://github.com/allan-gc/PenTracker" class="logo"> View Project on Github</a></p>
                                  
-
-                                    <h2>Deliverables and Results</h2>
-
-                                    <p>There are three senarios that need to be demonstrated and analysed. The task is to tune the proportional and integral controller to sample different dynamics when the end effector is initially configured in a position that is offset from the starting position of the desired end effector trajectory specified from milestone 2. </p>
-                                    
-                                    <p>All three senarios will have directories that will have the configuration csv file, a graph of the Xerror values through the trajectory, a readme file to describe the configuration  variable values used, and a video of the coppelia simulation.</p>
-                                    
 
 							</section>
 
 					</div> 
 
 				<!-- Footer -->
-				<footer id="footer">
+				<!-- <footer id="footer">
 					<section>
 						<header id="header">
-							<a href="https://github.com/dlandry97/Youbot_sim" class="logo">View on Github</a>
+							<a href= "https://github.com/allan-gc/PenTracker" class="logo">View Project on Github</a>
 						</header>
 					</section>
-				</footer>
+				</footer> -->
 
 
 				<!-- Copyright -->
