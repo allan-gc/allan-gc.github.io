@@ -45,71 +45,88 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>KukaBot Manipulation<br />
+									<h1>Kuka Motion Planning Simulation <br />
 									</h1>
 								</header>
 								<span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/Kukabot/Kuka_Best.mp4" type="video/mp4"></span>
 
 								<!-- Text stuff -->
 									
-									<h2>Overview</h2>
-                                   <p>The goal for this project was to create a code that outputs configuration arrays that are used to manipulate the kuka youbot robot in coppeliasim.
-                                    The robot trajectory is to complete a pick and place task on a cube. To do this, the project was split into 3 parts.</p>
+								   <h2>Overview</h2>
+                                   <p>
+
+									For this project, I simulated different motion plan trajectories for the Kuka youBot, a mobile omnidirectional robot with a manipulator. Each simulated trajectory involved
+									the Kukabot picking up a box from a starting location and placing it at a goal location. There were three simulated trajectories in total,  a 'best' trajectory, an 'overshoot' trajectory 
+									and a 'new task' trajectory. The three separate cases are distuinguished by using different types of feedback control and/or different starting conditions for the Kukabot and box. The simulations
+									were created in CoppeliaSim.
+									
+									</p>
+
+									<h2>Generating the trajectories</h2>
+
+									<p>
+
+									To generate each trajectory, a function is used to create a desired trajectory for the robot and end effector. That function uses eight smaller trajectories that are then appended together to create one final trajectory matrix. 
+									The actual robot configuration necessary to follow that desired path is then found by first calculating the body twist Vb that would take the robot 
+									from one configuration to the next. This is achieved by a feedback control function which takes in the current robot configuration, the desired configuration, and the next desired configuration.
+									This function also returns the body twist error which is plotted later. <br/>
+									</p>
+
+									<p>
+									After calculating the body twist, the actual robot configuration needed to reach the desired configuration is calculated using a next state function.
+									This function requires a current configuration and a control vector that governs how the next configuration is reached. The control vector is calculated using the returned body twist Vb from the feedback controller. After the next 
+									state configuration is calculated, it is used as set as the current state and restarts the set of calculations. The actual configurations of the robot calculated by the next state function are appended to a final trajectory matrix and converted to a .csv file that 
+									CoppeliaSim uses for simulation. 
+
+									</p>
+
+									<h2>Simulations and Graphical Results</h2>
+
+									<p>
+										For this project there were three different trajectories that were tested, a 'best' trajectory, an 'overshoot' trajectory and a 'new task' trajectory. For all three cases, the CoppeliaSim simulations showed the robot successfully picking up the box and moving it 
+										to another location. The error plots for the 'best' and 'newTask' cases also showed a convergence to zero at around 100-200 timesteps which coincided with the end of the first trajectory sequence. For both of these cases, feedforward-plus-P-plus-PI was used. 
+										There also seems to be a slight increase in the error for both of these cases at around 800-900 timesteps for the linear Z error. Using different Kp and Ki values either exacerbated the error or kept it the same. During the simulation there seems to be no 
+										odd behavior  during this trajectory sequence, and since the error is of relatively small magnitude in both cases the decision was made to ignore it.
+
+										The error plots for the 'overshoot' case shows realtively good overshoot oscialltion for some of the linear and angular twist variables but most end up converging to zero.
+
+									</p>
+
+									<p>
+										The initial conditions for the 'best' and 'overshoot' trajectories were the same for both the Kuka and the box. The 'new task' trajectory had a different 
+										starting and goal configuration for the box. 
+
+									</p>
             
-                                 
+									
+									
+									<h3>Best trajectory</h3>
+
+
+									<!-- <div class="box alt">
+                                        <div class="row gtr-50 gtr-uniform">
+                                            <div class="col-20"><span class="video fit2"><video width="700" height="450" controls autoplay muted loop src="assets/Kukabot/Kuka_Best.mp4" type="video/mp4"></span></div>
+                                            <div class="col-20"><span class="image fit"><img src="assets/Kukabot/best_errolist.png" alt="" /></span></div>
+                                        </div>
+                                    </div> -->
+
+									<span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/Kukabot/Kuka_Best.mp4" type="video/mp4"></span>
+									<span class="image fit"><img src="assets/Kukabot/best_errolist.png" alt="" width ="400" height = "550" /></span>
+
+
+									<h3>Overshoot Trajectory</h3>
+
+									<span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/Kukabot/Kuka_Overshoot.mp4" type="video/mp4"></span>
+									<span class="image fit"><img src="assets/Kukabot/overshoot_errorlist.png" alt="" width ="400" height = "550" /></span>
+
+
+									<h3>New Task Trajectory</h3>
+
+									<span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/Kukabot/Kuka_New.mp4" type="video/mp4"></span>
+									<span class="image fit"><img src="assets/Kukabot/newTask_errorlist.png" alt="" width ="400" height = "550"/></span>
+
+									<p><a href="https://github.com/allan-gc/Kuka_Youbot_Sim" class="logo"> View Project on Github</a></p>
                             
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><span class="image fit"><img src="assets/Kukabot/Milestone2.gif" alt="" /></span></div>
-											<div class="col-6"><span class="image fit"><p>Milestone 2 is to make a function (TrajectoryGenerator) that creates a desired trajectory for the end effector that follows the path to pickup and place the cube from one point to another.</p></span></div>
-										</div>
-									</div>
-
-                                    
-                                    <p>The final code for the project incorporates all of these milestone elements to simulate the robots kinematics to complete the pick and place task.</p>
-                                    
-                                    <h2>Code</h2>
-                                    <p>It uses the end effector trajectory from milestone 2 to perform a feedforward trajectory planning for the configuration of the whole youbot robot.
-                                        By manipulating the initial configuration and the Kp and Ki values of the controller the simulated robot will have different results when completing the task.
-                                        The code creates a csv file of the configuration array to perform the trajectory in coppelia sim. </p>
-
-                                    <p>There are three senarios that need to be demonstrated and analysed. The task is to tune the proportional and integral controller to sample different dynamics when the end effector is initially configured in a position that is offset from the starting position of the desired end effector trajectory specified from milestone 2. </p>
-                                    
-                                    <p>All three senarios will have directories that will have the configuration csv file, a graph of the Xerror values through the trajectory, a readme file to describe the configuration  variable values used, and a video of the coppelia simulation.</p>
-                                    
-
-                                    <h2>Best</h2>
-                                    <p></p>
-                                    <!-- <span class="image fit"><img src="assets/BBall/bballbotCAD.png" alt="" /></span> -->
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><span class="image fit"><img src="assets/Kukabot/best.gif" alt="" /></span></div>
-											<div class="col-6"><span class="image fit"><p>The Best senario is when the proportional and integral controllers are tuned in a way that eliminates error quickly and without overshoot to complete the simulated pick and place task. The error values should converge to zero by the time the robot completes the first trajectory segment.</p></span></div>
-											<!-- <div class="col-4"><span class="image fit"><img src="assets/ShearHaptics/prototype3.gif" alt="" /></span></div> -->
-										</div>
-									</div>
-
-                                    <h2>Overshoot</h2>
-                                    <p></p>
-                                    <!-- <span class="image fit"><img src="assets/BBall/bballbotCAD.png" alt="" /></span> -->
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><span class="image fit"><img src="assets/Kukabot/Overshoot.gif" alt="" /></span></div>
-											<div class="col-6"><span class="image fit"><p>The overshoot senario is when the controller and initial configuration is tuned to demonstrate an overshoot result of the Xerror values. The error values should still converge and the robot should still be able to complete the pick and place task.</p></span></div>
-											<!-- <div class="col-4"><span class="image fit"><img src="assets/ShearHaptics/prototype3.gif" alt="" /></span></div> -->
-										</div>
-									</div>
-
-                                    <h2>New Task</h2>
-                                    <p></p>
-                                    <!-- <span class="image fit"><img src="assets/BBall/bballbotCAD.png" alt="" /></span> -->
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><span class="image fit"><img src="assets/Kukabot/New_Task.gif" alt="" /></span></div>
-											<div class="col-6"><span class="image fit"><p>The new task senario is to demonstrate the pick and place task with a new set of initial and final positions of the cube. The controllers for this senario can be tuned to make the robot complete the task effectivly. </p></span></div>
-											<!-- <div class="col-4"><span class="image fit"><img src="assets/ShearHaptics/prototype3.gif" alt="" /></span></div> -->
-										</div>
-									</div>
 
 
 							</section>
