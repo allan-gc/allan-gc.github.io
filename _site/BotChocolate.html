@@ -20,6 +20,7 @@
 				<!-- Header -->
 					<header id="header">
 						<a href="index.html" class="logo">Allan Garcia-Casal</a>
+						<h4> Northwestern University | MS in Robotics</h4>
 					</header>
 
 				<!-- Nav -->
@@ -30,8 +31,9 @@
 							<li><a href="About.html">About Me</a></li>
 						</ul>
 						<ul class="icons">
-							<li><a href="https://www.linkedin.com/in/davinlandry/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
-							<li><a href="https://github.com/dlandry97" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/allan-garcia-casal/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/allan-gc" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:allang@u.northwestern.edu" class="icon solid fa-envelope" ><span class="label">Email</span></a></li>
 						</ul>
 					</nav>
 
@@ -41,10 +43,10 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>Bot Chocolate<br />
+									<h1>Bot Chocolate - Robotic Hot Chocolate Maker<br />
 									</h1>
 								</header>
-                                <span class="image fit"><img src="assets/BotChocolate/BotChocolate1.gif" alt="" /></span>
+                                <span class="image fit2"><img src="assets/BotChocolate/BotChocolate1.gif" alt="" /></span>
 
 								<!-- Text stuff -->
 									<!-- <h2>Text</h2>
@@ -52,229 +54,90 @@
 									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
 									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
 									Finally, this is a <a href="#">link</a>.</p> -->
-                                    <p>This project is a continuation of the Robotic Feet project that I worked on at the IHMC in 2021. In this project, I test new feet designs on a smaller-scale robot for cost efficiency and controllability.</p>
-                                    
-                                    <h2>Overview</h2>
 
-                                    <p> I hypothesized that having an additional toe linkage would result in a more human-like walking gait and more efficient force transfer throughout locomotion. With toes, the robot would perform a more natural toe-off and heel-strike action, improving efficiency by reducing the energy for forward movement. The toe-off/heel-strike gait also improves efficiency by reducing the lateral movement range of the torso during locomotion, leading to more consistent force and power requirements. 
-                                        The addition of toes would also create a more efficient "roll-over-shape" which would improve the efficiency of dynamic walking. </p>
 
-									<h2>The Robot</h2>
-									<span class="image fit"><img src="assets/Robotoe/op3_dimensions.png" alt="" /></span>
-									<p>The Robotis OP3 robot used in this experiment is a development-level humanoid driven by 20 dynamixel electric servo motors. There are 6 motors in each leg, 3 motors in each arm, and 2 motors in the head. Although the major degrees of freedom are similar between the OP3 robot and the humanoid form, the joint positions on the leg are not anthropomorphic, as each linkage is a uniform length to fit each motor into the OP3 robot. 
-										<br>The robot's computer is an intel NUC that runs on Linux Mint and the robot's operating system is ROS Kinetic, running several Robotis ROS packages. The Northwestern University Robotics lab owns the robot and asked me to update the OP3 operating system and packages to the current versions they use in the lab. 
-										This process involved updating the intel NUC OS to ubuntu 20.04 and the ROS version from Kinetic (2016) to Noetic (2020). The new ROS version also required me to update the Robotis OP3 packages in order to use the robot. Unfortunately, Robotis discontinued development for the OP3 robot in 2016, so I forked each ROS package that needed to be changed and made adjustments to the code to function with ROS Noetic. This involved making changes from python 2 to python 3 and OpenCV 3 to OpenCV 4.
-										There are links to the github repos of these packages at the bottom of this page.<br>
-										I also needed to use an older version of Orocos Kinematics Dynamics library so that the balance controller would run without issues. 
-										
-
-									</p>
-                                    <h2>Design</h2>
-                                    <p> Using the Onshape CAD software, I designed new feet to replace the original ones on the OP3.
-										The new feet are designed with a passive toe linkage and a rigid roll-over-shape, completing the 4th linkage humans have for bipedal locomotion. The footprint dimensions of the feet were similar to the original flat feet that come with the Robotis-OP3 kit. 
-										Using the roll-over-shape formula of r = l/3, with r as the roll-over-shape radius and l as the leg length, The template of the roll-over-shape can be used to make feet with a variety of angles. 
-										</p>
-										<div class="box alt">
-											<div class="row gtr-50 gtr-uniform">
-												<div class="col-6"><span class="image fit"><img src="assets/Robotoe/onshaperos.png" alt="" /></span></div>
-												<div class="col-6"><span class="image fit"><img src="assets/Robotoe/onshapetfoot.png" alt="" /></span></div>
-												
-											</div>
-										</div>
-										
-										<p>I created the roll-over-shape foot with a toe angle of 30 degrees.
-										The toe linkage hinge for the T-foot was positioned for optimal force distribution at a 40 degree angle. 
-
-										 </p>
-										 
-									<h2>Walking Gaits</h2>
-									<p>The Robotis packages come with a default walking gait designed specifically for Robotis robots, including the OP3. In addition, there are adjustable parameters that you can manipulate with a gui demo in the software. The default walking gait uses ZMP (zero moment point) for balance and locomotion. The walking parameters were limited to only use flat-footed walking as the OP3 was only intended to have flat feet, meaning that even with toed feet attached, the robot would be unable to utilize its mechanics.
-										The OP3 ROS packages cannot add new walking controllers or new gaits easily. Therefore, in order to utilize and test the toe mechanism, I needed to create my own walking gait from scratch using hardcoded joint states. 
-										Using the human gait as a reference, I created a new gait cycle for the OP3 that included stance/swing phases, single and double support phases, and the eight stages of the human gait cycle: Heel-strike, loading response, mid-stance, terminal stance, pre-swing, toe-off, mid-swing, and terminal swing. The toe-off and knee straightening movement is used to propel the hips forward at the end of the double support phase. 
-									</p>
-
-									<span class="image fit"><img src="assets/Robotoe/gait_comparison.JPG" alt="" /></span>
-										
-									
+									<h2>Overview</h2>
 									<p>
-										The new gait I created nicely emulated the human gait and relies on the utilization of the toe mechanism. However, the hard coded nature of the toed, human-like gait led to balance issues. Without the proper development of a balanced human walking gait, the system would not be able to consistently function without falling to either side. 
-										To keep the human-like gait stable during locomotion without a proper walking controller, the testrig ("baby walker") was adjusted to support the robot on either side to prevent the robot from falling and/or veering off course. The walker did not directly support the robot's weight or influence forward movement. The robot's feet supported all of its weight and propelled it forward. The "baby walker" only helped stabilize the robot laterally and prevented it from falling over.
+
+									 For this project, a Franka Emika Panda robotic arm was used to autonomously make hot chocolate. 
+									 To perceive the environment, the system utilizes an Intel D435i camera and AprilTags. Upon initial setup, a calibration process must be completed to intialize the robot's 
+									 end-effector frame to the other object frames in the scene. After this, the process consisted of using AprilTags to locate a scoop of cocoa, a mug, a spoon, and a kettle 
+									 relative to the robot. Next, using our custom MoveIt API for Python called 'movebot', the robot is able to perform path planning between all of these objects. It turns on the kettle, dumps 
+									 the cocoa powder into the mug, pours the hot water over the power, and stirs the mixture with a popsticle stick or spoon. 
+
+									 <br/>
+									 <br/>
+
+									 <!-- <b> Making Hot Chocolate (1.5x Speed)</b> -->
+
+									 Here is the Franka arm following the entire motion plan (at 1.5x speed):
+
 									</p>
-									
-									
-									<h2>Metrics</h2>
-									<p>To compare the efficiency between flat-footed walking and toed walking on the robot, several metrics should be established: Walking speed, number of steps taken, potential energy efficiency, kinetic energy efficiency, and power consumption. 
-										Initially, power consumption was going to be collected by directly measuring the current being supplied to each motor. This would be done using the dynamixel 2.0 protocol to read the current from each motor in real time as the robot functions. 
-										Unfortunately, the read/write protocol and the Robotis ROS packages did not leave any ability to simultaneously read currents and operate the robot with its predefined functions. I wrote ROS packages that attempted to read the motor currents in the background, however the robot would freeze up and loose control due to the way the Robotis software syncronized its read/write protocols.
-										Moving forward, tracking kinetic and potential energy efficiencies was the only way to gather energy metrics for the project. 
-										<br>										
-										The experiment would collect the amount of potential and kinetic energy expended during the 2.5-meter walk as well as the number of steps and time it took to complete the walk. The results would compare the measurements between walking with toes and the default control case with flat-footed walking.
-									</p>
-									
-										<h2>Testing setup</h2>
-									<p>To track the potential and kinetic energies, the real time location of the robot's enter of mass needed to be tracked and recorded. This was done using an Intel RealSense camera and Apriltags attached to the robot. An OP3 "baby walker" was made to mount the cameras, Apriltags, and catch the robot from falling to prevent damage to the robot.</p>
+
+									<!-- <span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/BotChocolate/BotChocLQ.mp4" type="video/mp4"></span> -->
+									<span class="video fit2"><video width="800" height="450" controls loop src="assets/BotChocolate/BotChocolateSpedUp.mp4" type="video/mp4"></span>
+
         
-                                    <h3>Photos of testing setup</h3>
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/test_rig.jpg" alt="" /></span></div>
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/op3_tfoot_rviz.png" alt="" /></span></div>
-											
-										</div>
-									</div>
-									<p>The RealSense camera is mounted in front of the robot to record the positions of 2 Apriltags. One Apriltag is located on the center of mass of the robot, and the other is attached to the testing rig structure as a reference position. This setup can track the robot's x and y position in real time. 
-										 
+
+									<h2>MoveIt and ROS2 API</h2>
+
+									<p>
+
+									 My main role in this project was to integrate the MoveIt robot manipulation package and ROS2 Humble into a Python API for motion and path planning. The MoveIt package includes 
+									 many actions and services for motion planning and robot control. The API itself was created as a ROS2 node that contains the corresponding action
+									 and service clients. By doing so, the API can interact with the robot through the MoveIt actions and services.
+								
+
+
+									</p>
+									
+									<p>
+
+									The biggest hurdle in integrating the MoveIt package into a ROS2 node was getting the action and service requests to be sent correctly such that a proper
+									response was generated. As a result, a large part of the API involves helper functions that fill in the request or goal messages that are sent to the 
+									action and service clients. The general workflow of the motion planning API is as follows:
 									</p>
 
-									<h2>Testing Parameters</h2>
-									
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><p>There were several different feet configurations and gait configurations tested in this experiment. 
-												<br>
-												The variety of feet include: 
-												<br>
-											Default OP3 flat foot<br>
-											
-											Default OP3 flat foot with grip pads<br>
-											
-											T-foot (Toe foot)<br>
-											
-											T-foot with grip pad<br>
-											
-											ROS foot (roll-over-shape)<br>
-											
-											ROS foot with grip pad<br></p></div>
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/rosfoot.gif" alt="" /></span>
-											<span class="image fit"><img src="assets/Robotoe/sideways_tfoot.gif" alt="" /></span></div>
-											
-										</div>
-									</div>
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><p>
-												The varienty of Gaits tested include:<br>
-												
-												Default OP3 walking<br>
-												
-												Tuned/improved OP3 walking<br>
-												
-												Davin's Humanoid walking gait
-												<br>
-												
-											
-												The control cases use the default OP3 walking gait and an improved OP3 walking gait using the default OP3 flat foot.
-												The control default OP3 walking gait performed the least efficiently in all metrics versus any other test case. This led to using the improved OP3 flat-footed gait as the primary control case for gait comparison.  </p>
-											</div>
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/flat_flat.gif" alt="" /></span></div>
-											
-										</div>
-									</div>
-									
-									<h2>Results</h2>
-									<li><a href="https://docs.google.com/spreadsheets/d/1IrCgy_Gi_Qbu7oFV6HFMnGyTHOwDgpTtGjb_Q2b9HTY/edit?usp=share_link">Click here for Table of all collected results</a></li>
-									
-									<!-- <p>From The bar graph above, you can see that the Improved Flat gait(F-gait) generally performed better than the Human-like gait (H-gait).</p> -->
-									<p><sub>From The bar graph, you can see that the Improved Flat gait (F-gait) generally performed better than the Human-like gait (H-gait). <br>The number of steps the robot took is not necessarily an indicator of efficiency. </sub></p>
-
-									<span class="image fit"><img src="assets/Robotoe/average_results.JPG" alt="" /></span>
-									<p><sub>The time deviation is much smaller for the Human-like gait, showing that it has much more consistant and reliable speed.</sub></p>
-
-									<span class="image fit"><img src="assets/Robotoe/dev_time.JPG" alt="" /></span>	
-									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"> <p><sub>The roll-over-shape foot has high deviation between trials for potential energy expenditure. This deviation is probably due to the foot shape occasionally propelling the robot mass upwards rather than forwards.</sub></p><span class="image fit"><img src="assets/Robotoe/dev_potential.JPG" alt="" /></span></div>
-											<div class="col-6"><p><sub>The Default flat foot seems to cause less deviation between trials for kinetic energy expenditure.</sub></p><span class="image fit"><img src="assets/Robotoe/dev_kinetic.JPG" alt="" /></span></div>
-										</div>
-
-									</div>							
-									<!-- <span class="image fit"><img src="assets/Robotoe/dev_potential.JPG" alt="" /></span>
-									<span class="image fit"><img src="assets/Robotoe/dev_kinetic.JPG" alt="" /></span> -->
-									<!-- <div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/average_results.JPG" alt="" /></span></div>
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/STD_VAR_graph.JPG" alt="" /></span></div>
-											
-										</div>
-									</div> -->
-
-									<p>The results of the experiment show a few key differences between how the robot moves its center of mass for the different gaits.  
-										
-										<br>
-										The displacement in the x (horizontal) direction is significantly higher in the default OP3 gait than the human-like gait but is less significant in the improved OP3 flat-footed gait. This side-to-side swinging is used to keep the center of mass of the robot over the support foot and would alternate as each step is taken.
-										The x displacement is factored into the kinetic energy expenditure and shows that the flat-footed walking gait uses energy to move its center of mass from left to right.
-										The human-like gait has less consistent side-to-side movement because the center of mass is not always stable and falls forward in the swing phase to be caught by the heel strike. This is one of the defining characteristics of the biphasic forward propulsion of the center of gravity of the human walking gait.
-										</p>
-										<div class="box alt">
-											<div class="row gtr-50 gtr-uniform">
-												<p><sub>Notice the high oscillation in the flat walking gait compared to the human-like gait. </sub></p>
-												<div class="col-6"><span class="image fit"><img src="assets/Robotoe/X-Flat.png" alt="" /></span></div>
-												<div class="col-6"><span class="image fit"><img src="assets/Robotoe/x-human.png" alt="" /></span></div>												
-											</div>
-										</div>
-										
 									<p>
+										<span class="image fit2"><img src="assets/BotChocolate/flowc.jpg" alt="" width="100" height="170" /></span>
+									</p>
 									
-										Another characteristic I was focused on was hip height throughout the gait cycles. I was expecting to see more fluctuation in the hip height during the human-like gait however, the opposite was the case. 
-										y-displacement data showed that potential energy conservation was more efficient in the flat-footed gait. This is likely due to the flat-footed gait keeping knees bent and the hips level at all times, reducing the hip height movement and maintaining the system stability during locomotion. 
-										These data demonstrate that the flat improved OP3 gait has the greatest efficiency, least variance, and smallest distribution in potential energy conservation of all the test cases.
-										</p>
-										<div class="box alt">
-											<div class="row gtr-50 gtr-uniform">
-												<p><sub>The Hip height oscillation has larger peak to peak amplitudes for the human-like gait in these trials.</sub></p>
-												<div class="col-6"><span class="image fit"><img src="assets/Robotoe/Y-Flat.png" alt="" /></span></div>
-												<div class="col-6"><span class="image fit"><img src="assets/Robotoe/Y-Human.png" alt="" /></span></div>
-											</div>
-										</div>
 
-										<p>
-										The step length of the toed walking gait is significantly larger than the flat-footed walking gait as shown by the steps required to reach 2.5 meters. The human-like gait took an average of 11.6 steps to travel 2.5 meters, whereas the improved flat-footed gait took an average of 40.6 steps to travel 2.5 meters.
-									  </p>
-									  <div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/flat_flat.gif" alt="" /></span></div>
-											<div class="col-6"><span class="image fit"><img src="assets/Robotoe/flatfootDgait.gif" alt="" /></span></div>
-											
-										</div>
-									</div>
+	
+									<p>
+									The API also includes custom ROS2 messages and services that I created to make certain MoveIt service request messages easier to populate, and for calling
+									the actions and services without the need for the terminal. 
+
+				
+									</p>
 
 
-									  <h2>conclusion</h2>
-									  <p>
-										The initial hypotheses made for toed feet and human-like gaits for bipedal walking were only partially supported by the data gathered. The improved flat-footed gait with flat feet showed to be the best performing and more consistent. There is shown to be high consistency in the data for the T-foot with human-like gait in energy efficiency. This is an important finding in that it suggests the potential for improvements in other metrics if a better-tuned human-like gait were to be developed. 
-										This experiment has shown that the utilization of toes in bipedal robots has the potential for improving energy efficiency and locomotion speed, compared to the standard flat-footed walking utilized by most other bipedal robots. 
-										The issues with implementing toes on robot bipeds, however, involves the additional degree of freedom, increasing the system's complexity, and requiring a more complex walking controller to keep the robot stable.
-										As toed robots and more human-like gait patterns are developed further, increased efficiency and effectiveness are likely to result.
-										Additional benefits might include human-like aesthetics in the appearance of the walking gait.
-									  </p>
+									<h2>Using the API</h2>
+									<p> 
+									
+									Since there is much happening in the backend with 
+									all the action and service calls, one of the custom services and messages was created explcitly to make user input as simple as possible. This service allows 		
+									the user to generate motion plans by inputting start and goal poses in either Cartesian coordinates or joint angles. It also allows the user to choose whether 
+									they would want to 'plan' or 'plan and execute' their trajectory. 
 
-									  <h2>Future experiment improvements</h2>
-									  <p>To improve the detail of the experiment and conclusions, some future changes could be made. 
-										First, being able to accurately monitor the robot's power consumption while walking would give definitive insight into energy efficiency. 
-										Having a more extensive variety of feet to test, including changing the angles of the roll-over-shape feet and testing a variety of different spring tensions for the toed feet, would give additional insights into how the designs affect the way the robot walks.
-										The most challenging improvement would involve creating an open-loop human-like walking control algorithm to keep the robot balanced while walking. However, due to the complex nature of humanoid walking and the current state and methods for bipedal walking control, creating such algorithms would involve undertaking very complex projects of their own.
-										 </p>
+									</p>
 
+									<p>
+										For this project, we created another node that contained the entire motion plan for the Franka to make hot chocolate. This node used the 
+										movebot Python API services and messages to interact with Moveit and the Franka arm, and it functioned as the main hub for all the motion plan
+										testing. After the entire motion plan was assembled and tested seperately, I created a service that would signal the Franka arm to begin moving
+										according to the motion plan. 
 
-										 <span class="image fit"><img src="assets/Robotoe/op3_laserfx2.jpg" alt="" /></span>
+									</p>
 
+									<p>
+										With our API, the Franka arm was able to successfully make cups of hot chocolate autonomously. Once it finished creating one cup, it was able
+										serve up another one with no issue or need for restarting any nodes or programs.
+										
+									</p>
 
-									  <h2>GITHUB Repos</h2>
-									  <p>Here is a link to the OP3 testbed ROS package I made to collect and store the experiment data.</p>
-									  <li><a href="https://github.com/dlandry97/OP3_walking_testbed">OP3_Noetic</a></li>
-									  <p>Here are the ROS packages I forked and changed to update the Robotis OP3 to ROS Noetic</p>
-									  <li><a href="https://github.com/dlandry97/ROBOTIS-OP3_noetic_1.0">ROBOTIS-OP3</a></li>
-									  <li><a href="https://github.com/dlandry97/ROBOTIS-OP3-Tools_Noetic_1.0">ROBOTIS-OP3-Tools</a></li>
-									  <li><a href="https://github.com/dlandry97/ROBOTIS-OP3-Demo_Noetic_1.0">ROBOTIS-OP3-Demo</a></li>
-									  <li><a href="https://github.com/dlandry97/ROBOTIS-OP3-Common_Noetic_1.0">ROBOTIS-OP3-Common</a></li>
-									  <li><a href="https://github.com/dlandry97/ROBOTIS-Framework_Collection">ROBOTIS-Framework</a></li>
-									  <li><a href="https://github.com/dlandry97/face_detection_CV4">Face Detection</a></li>
-									  <li><a href="https://github.com/dlandry97/humanoid_navigation_noetic_op3">Humanoid Navigation</a></li>
-
-
-
-
-
+									<p><a href="https://github.com/allan-gc/BotChocolate"  class="logo"> View Project on Github</a></p>	
+								
 
 
 
@@ -284,14 +147,6 @@
 
 					</div>
 
-				<!-- Footer -->
-				<!-- <footer id="footer">
-					<section>
-						<header id="header">
-							<a href="https://github.com/ME495-EmbeddedSystems/final-project-vestibular" class="logo">View on Github</a>
-						</header>
-					</section>
-				</footer> -->
                
 
 				<!-- Copyright -->
