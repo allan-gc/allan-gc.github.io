@@ -57,7 +57,7 @@
 
 									For this project, I simulated different motion plan trajectories for the Kuka youBot, a mobile omnidirectional robot with a manipulator. Each simulated trajectory involved
 									the Kukabot picking up a box from a starting location and placing it at a goal location. There were three simulated trajectories in total,  a 'best' trajectory, an 'overshoot' trajectory 
-									and a 'new task' trajectory. The three separate cases are distuinguished by using different types of feedback control and/or different starting conditions for the Kukabot and box. The simulations
+									and a 'new task' trajectory. The three separate cases are distinguished by different types of feedback control and/or different starting conditions for the Kukabot and box. The simulations
 									were created in CoppeliaSim.
 									
 									</p>
@@ -67,15 +67,15 @@
 									<p>
 
 									To generate each trajectory, a function is used to create a desired trajectory for the robot and end effector. That function uses eight smaller trajectories that are then appended together to create one final trajectory matrix. 
-									The actual robot configuration necessary to follow that desired path is then found by first calculating the body twist Vb that would take the robot 
+									The actual robot configuration needed to follow that desired path is then found by first calculating the body twist that would take the robot 
 									from one configuration to the next. This is achieved by a feedback control function which takes in the current robot configuration, the desired configuration, and the next desired configuration.
 									This function also returns the body twist error which is plotted later. <br/>
 									</p>
 
 									<p>
 									After calculating the body twist, the actual robot configuration needed to reach the desired configuration is calculated using a next state function.
-									This function requires a current configuration and a control vector that governs how the next configuration is reached. The control vector is calculated using the returned body twist Vb from the feedback controller. After the next 
-									state configuration is calculated, it is used as set as the current state and restarts the set of calculations. The actual configurations of the robot calculated by the next state function are appended to a final trajectory matrix and converted to a .csv file that 
+									This function requires a current configuration and a control vector that governs how the next configuration is reached. The control vector is calculated using the returned body twist from the feedback controller. After the next 
+									state configuration is calculated, it is set as the current state and restarts the set of calculations. The actual configurations of the robot calculated by the next state function are appended to a final trajectory matrix and converted to a .csv file that 
 									CoppeliaSim uses for simulation. 
 
 									</p>
@@ -86,7 +86,7 @@
 										For this project there were three different trajectories that were tested, a 'best' trajectory, an 'overshoot' trajectory and a 'new task' trajectory. For all three cases, the CoppeliaSim simulations showed the robot successfully picking up the box and moving it 
 										to another location. The error plots for the 'best' and 'newTask' cases also showed a convergence to zero at around 100-200 timesteps which coincided with the end of the first trajectory sequence. For both of these cases, feedforward-plus-P-plus-PI was used. 
 										There also seems to be a slight increase in the error for both of these cases at around 800-900 timesteps for the linear Z error. Using different Kp and Ki values either exacerbated the error or kept it the same. During the simulation there seems to be no 
-										odd behavior  during this trajectory sequence, and since the error is of relatively small magnitude in both cases the decision was made to ignore it.
+										odd behavior during this trajectory sequence, and since the error is of relatively small magnitude in both cases the decision was made to ignore it.
 
 										The error plots for the 'overshoot' case shows realtively good overshoot oscialltion for some of the linear and angular twist variables but most end up converging to zero.
 
