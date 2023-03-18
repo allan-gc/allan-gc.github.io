@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Allan Garcia-Casal - A.R.M </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Allan Garcia-Casal</a>
+						<h4> Northwestern University | MS in Robotics</h4>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Projects</a></li>
+							<li><a href="Resume.html">Resume</a></li>
+							<li><a href="About.html">About Me</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/allan-garcia-casal/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/allan-gc" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:allang@u.northwestern.edu" class="icon solid fa-envelope" ><span class="label">Email</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>A.R.M - EMG Teleoperation of Robotic Arm<br />
+									</h1>
+								</header>
+                                <span class="image fit2"><img src="assets/Adroit/adroit2.gif" alt="" /></span>
+
+								<!-- Text stuff -->
+									<!-- <h2>Text</h2>
+									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
+									Finally, this is a <a href="#">link</a>.</p> -->
+
+
+									
+									<h2>Overview</h2>
+									<p>
+								
+									 <br/>
+
+									 	For this project, an Adroit Robotic Arm was used as a teleoperated robotic helper. A Thalmic Labs Myo Armband was used as the controller for the Adroit arm. The armband would go around the user's forearm and read the muscle activity in the form of EMG signals.
+										These signals were then passed through a gesture classification machine learning model which would map the inputted EMG signals to a specified gesture, such as a fist. These gestures were used to control the end effector of the Adroit.
+										To make the user have more control of the Adroit's movements, the gyroscope measurements from the IMU of the armband were used to control the position of other Adroit joints. This combination of EMG and IMU inputs gives almost full control of the Adroit arm, and it allowed for the completion
+										of simple tasks with relative ease for the user. 
+										
+
+									
+									 <br/>
+									 <br/>
+
+									 Here is a video showcasing the basic functionality of the system, including the completion of some more difficult tasks. The video labels the sections that are sped up.
+
+									</p>
+
+									<!-- <span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/BotChocolate/BotChocLQ.mp4" type="video/mp4"></span> -->
+									<!-- <span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/FINAL_VID.mp4" type="video/mp4"></span> -->
+									<br/>
+									<br/>
+
+        
+
+									<h2> Gesture Recognition Machine Learning Model</h2>
+
+									<p>
+
+										The machine learning model used for this project was developed by Robert Schloen, so I will link to his project page <a href="https://rschloen.github.io/portfolio/2020/01/10/semg-control.html">here</a> for more details.
+										
+										 The model was trained on data from the <a href="http://ninaweb.hevs.ch/">Ninapro Database 5,</a>  which collected thousands of EMG samples using the same Myo Armbands that Robert and I used. The dataset contains data for many different gestures, 
+										 including flexion of each finger, different wrist movements, and different grasps. I ultimately chose to use the same gestures that Robert chose to train on, which included the flexion of the five fingers and a closed fist. This was primarily 
+										 because the model was not as accurate when trying to classify different grasp and wrists. Below is a video showing the real time classification of these gestures using the Myo Armband in a Python ROS node. 
+
+
+										 <span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/REALTIME_NODE.webm" type="video/mp4"></span>
+										<br/>
+										<br/>
+
+
+									</p>
+									
+									<p>
+
+									The biggest hurdle in integrating the MoveIt package into a ROS2 node was getting the action and service requests to be sent correctly such that a proper
+									response was generated. As a result, a large part of the API involves helper functions that fill in the request or goal messages that are sent to the 
+									action and service clients. The general workflow of the motion planning API is as follows:
+									</p>
+
+									<p>
+										<span class="image fit2"><img src="assets/BotChocolate/flowc.jpg" alt="" width="1200" height="130" /></span>
+									</p>
+									
+
+	
+									<p>
+									The API also includes custom ROS2 messages and services that I created to make certain MoveIt service request messages easier to populate, and for calling
+									the actions and services without the need for the terminal. 
+
+				
+									</p>
+
+
+									<h2>Using the API</h2>
+									<p> 
+									
+									Since there is much happening in the backend with 
+									all the action and service calls, one of the custom services and messages was created explcitly to make user input as simple as possible. This service allows 		
+									the user to generate motion plans by inputting start and goal poses in either Cartesian coordinates or joint angles. It also allows the user to choose whether 
+									they would want to 'plan' or 'plan and execute' their trajectory. 
+
+									</p>
+
+									<p>
+										For this project, we created another node that contained the entire motion plan for the Franka to make hot chocolate. This node used the 
+										movebot Python API services to interact with Moveit and the Franka arm, and it functioned as the main hub for all the motion plan
+										testing. After the entire motion plan was assembled and tested seperately, I created a service that would signal the Franka arm to begin moving
+										according to the motion plan. 
+
+									</p>
+
+									<p>
+										With our API, the Franka arm was able to successfully make cups of hot chocolate autonomously. Once it finished creating one cup, it was able
+										serve up another one with no issue or need for restarting any nodes or programs.
+										
+									</p>
+
+									<p><a href="https://github.com/allan-gc/Bot-Chocolate-ROS2"  class="logo"> View Project on Github</a></p>	
+								
+
+
+
+							
+
+							</section>
+
+					</div>
+
+               
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Allan Garcia-Casal </li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
