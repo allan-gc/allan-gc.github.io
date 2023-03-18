@@ -58,9 +58,9 @@
 
 									
 									<h2>Overview</h2>
-									<p>
+									<p style="text-indent: 50px;">
 								
-									 <br/>
+									 
 
 									 	For this project, an Adroit Robotic Arm was used as a teleoperated robotic helper. A Thalmic Labs Myo Armband was used as the controller for the Adroit arm. The armband would go around the user's forearm and read the muscle activity in the form of EMG signals.
 										These signals were then passed through a gesture classification machine learning model which would map the inputted EMG signals to a specified gesture, such as a fist. These gestures were used to control the end effector of the Adroit.
@@ -76,8 +76,7 @@
 
 									</p>
 
-									<!-- <span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/BotChocolate/BotChocLQ.mp4" type="video/mp4"></span> -->
-									<!-- <span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/FINAL_VID.mp4" type="video/mp4"></span> -->
+									<span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/FINAL_VID2_FINAL.mp4" type="video/mp4"></span>
 									<br/>
 									<br/>
 
@@ -85,7 +84,7 @@
 
 									<h2> Gesture Recognition Machine Learning Model</h2>
 
-									<p>
+									<p style="text-indent: 50px;">
 
 										The machine learning model used for this project was developed by Robert Schloen, so I will link to his project page <a href="https://rschloen.github.io/portfolio/2020/01/10/semg-control.html">here</a> for more details.
 										
@@ -95,22 +94,33 @@
 
 
 										 <span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/REALTIME_NODE.webm" type="video/mp4"></span>
+
 										<br/>
 										<br/>
 
+										Here is a video of using these gestures with the Adroit. While I trained 7 gestures, I really only ever use 5: Rest or Open Hand, Fist, Pinky, Ring and Thumb. As the video shows, I map the 
+										"Fist" gesture to be a small end effector grip and the "Pinky" to be a larger grasp,  "Ring" is used as a recallibration flag, and "Thumb"  was used to extend a joint not on the gripper. 
 
+										<span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/REALTIME_NODE.webm" type="video/mp4"></span>
+									
 									</p>
 									
+									<h2> IMU Control using the Myo</h2>
+
+									<p style="text-indent: 50px;">
+
+
+										The Myo Armband comes equipped with a nine degreee of freedom IMU. 
+
+										 <span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/REALTIME_NODE.webm" type="video/mp4"></span>
+										<br/>
+										<br/>
+
+
+									</p>
 									<p>
 
-									The biggest hurdle in integrating the MoveIt package into a ROS2 node was getting the action and service requests to be sent correctly such that a proper
-									response was generated. As a result, a large part of the API involves helper functions that fill in the request or goal messages that are sent to the 
-									action and service clients. The general workflow of the motion planning API is as follows:
-									</p>
-
-									<p>
-										<span class="image fit2"><img src="assets/BotChocolate/flowc.jpg" alt="" width="1200" height="130" /></span>
-									</p>
+								
 									
 
 	
