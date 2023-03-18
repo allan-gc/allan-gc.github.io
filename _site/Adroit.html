@@ -86,7 +86,7 @@
 
 									<p style="text-indent: 50px;">
 
-										The machine learning model used for this project was developed by Robert Schloen, so I will link to his project page <a href="https://rschloen.github.io/portfolio/2020/01/10/semg-control.html">here</a> for more details.
+										The machine learning model used for this project was developed by Robert Schloen using PyTorch, so I will link to his project page <a href="https://rschloen.github.io/portfolio/2020/01/10/semg-control.html">here</a> for more details.
 										
 										 The model was trained on data from the <a href="http://ninaweb.hevs.ch/">Ninapro Database 5,</a>  which collected thousands of EMG samples using the same Myo Armbands that Robert and I used. The dataset contains data for many different gestures, 
 										 including flexion of each finger, different wrist movements, and different grasps. I ultimately chose to use the same gestures that Robert chose to train on, which included the flexion of the five fingers and a closed fist. This was primarily 
@@ -112,7 +112,10 @@
 
 										The Myo Armband comes equipped with a nine degreee of freedom IMU. I chose to use the gyroscope data to control the position of certain Adroit Joints. Below is a photo of the Adroit with 
 										the labeled joints that were used, as well as a schematic of the Myo. To control Joint 1, I use the gyroscope data of the z-axis, to control Joint 3, I use the y-axis, and to control Joint 4 I use the x-axis. This
-										corresponds to the gyroscope changes that occur when the Myo is on the forearm. 
+										corresponds to the gyroscope changes that occur when the Myo is on the forearm. Trying to control position of joints using gyroscope proved difficult since 
+										the gyroscope measurements began to drift over time, and because the orientation of the Myo would change slighly as it was on the forearm. This was the main
+										reason to add the recallibration gesture, which stops all control to the Adroit and allows the user to simply realign themselves with the arm and continue
+										using it. The video showcases this functionality.
 										<br/>
 										<br/>
 
@@ -135,11 +138,13 @@
 										<br/>
 										<br/>
 										<br/>
-										
 
-										
+										Trying to control position of joints using gyroscope proved difficult since 
+										the gyroscope measurements began to drift over time, and because the orientation of the Myo would change slighly as it was on the forearm. This was the main
+										reason to add the recallibration gesture, which stops all control to the Adroit and allows the user to simply realign themselves with the arm and continue
+										using it. The video below showcases general control of the Adroit using the IMU as well as the recallibration functionality. 
+										<span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/Adroit_position_text_comp.mp4" type="video/mp4"></span>
 
-									
 
 									</p>
 									<p>
@@ -156,13 +161,10 @@
 									</p> -->
 
 
-									<h2>Using the API</h2>
+									<h2>ROS Interface</h2>
 									<p> 
 									
-									Since there is much happening in the backend with 
-									all the action and service calls, one of the custom services and messages was created explcitly to make user input as simple as possible. This service allows 		
-									the user to generate motion plans by inputting start and goal poses in either Cartesian coordinates or joint angles. It also allows the user to choose whether 
-									they would want to 'plan' or 'plan and execute' their trajectory. 
+									The Adroit used in this project came with ROS 1 compatability 
 
 									</p>
 
