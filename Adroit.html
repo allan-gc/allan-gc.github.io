@@ -10,7 +10,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
 	</head>
 	<body class="is-preload">
 
@@ -164,25 +166,35 @@
 									<h2>ROS Interface</h2>
 									<p> 
 									
-									The Adroit used in this project came with ROS 1 compatability 
+									The Adroit was controlled using ROS 1 Noetic from within a Docker container. The Adroit already had the capabilty of being controlled via an Xbox controller using 
+									nodes from previously built packages. To control it with the Myo, I mapped the Xbox buttons and joystick commands to certain Myo gestures or IMU measurements. For example, 
+									moving the left joystick to the left would send a command to Joint 1 to move, and so I made it such that the gyroscope readings in the z-axis would act as the left joystick control 
+									for left and right movements. Below is a schematic of the ROS nodes and how they interact and interface the Myo with the Adroit. The blue nodes are the new ones corresponding to
+									gesture prediction and IMU control, while the grey are the existing nodes that lay the foundation for interfacing and controlling thr Adroit with an Xbox controller. The Adroit gesture control 
+									node would all Myo data, meaning a predicted gesture and IMU stream. It would then act as a game controller by publishing joystick commands to the estabilished joystick node. The joystick node and the main Adroit 
+									control node would then send joint commands to the Adroit and recieve back information on the joint positions. 
+
+									<br/>
+									<br/>
+
+									<span class="image fit2"><img src="assets/Adroit/Flowchart2.jpg" alt="" width="500" height="450" /></span>
+
+
+
+									<h2>Future Considerations</h2>
+
+									<p>
+										While this project was successful in allowing for the control of the Adroit, the IMU control required the recallibration gesture due to its eventual inaccuracy. The pose estimation 
+										problem that comes with trying to use IMUs to detect the position of an object, in this case the Myo on the forearm, could definitely be looked into more in order to make the control 
+										more robust. 
 
 									</p>
 
 									<p>
-										For this project, we created another node that contained the entire motion plan for the Franka to make hot chocolate. This node used the 
-										movebot Python API services to interact with Moveit and the Franka arm, and it functioned as the main hub for all the motion plan
-										testing. After the entire motion plan was assembled and tested seperately, I created a service that would signal the Franka arm to begin moving
-										according to the motion plan. 
-
-									</p>
-
-									<p>
-										With our API, the Franka arm was able to successfully make cups of hot chocolate autonomously. Once it finished creating one cup, it was able
-										serve up another one with no issue or need for restarting any nodes or programs.
 										
 									</p>
 
-									<p><a href="https://github.com/allan-gc/Bot-Chocolate-ROS2"  class="logo"> View Project on Github</a></p>	
+									<p><a href="https://github.com/allan-gc/EMG_Teleoperation"  class="logo"> View Project on Github</a></p>	
 								
 
 
