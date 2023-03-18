@@ -98,10 +98,10 @@
 										<br/>
 										<br/>
 
-										Here is a video of using these gestures with the Adroit. While I trained 7 gestures, I really only ever use 5: Rest or Open Hand, Fist, Pinky, Ring and Thumb. As the video shows, I map the 
-										"Fist" gesture to be a small end effector grip and the "Pinky" to be a larger grasp,  "Ring" is used as a recallibration flag, and "Thumb"  was used to extend a joint not on the gripper. 
+										Here is a video of using these gestures with the Adroit. While I trained 7 gestures, I really only ever use 5: Rest or Open Hand, Fist, Pinky, Ring and Middle. As the video shows, I map the 
+										"Fist" gesture to be a small end effector grip and the "Pinky" to be a larger grasp,  "Ring" is used as a recallibration flag, and "Middle"  was used to extend a joint not on the gripper.  
 
-										<span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/REALTIME_NODE.webm" type="video/mp4"></span>
+										<span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/Adroit_gestures.mp4" type="video/mp4"></span>
 									
 									</p>
 									
@@ -110,12 +110,36 @@
 									<p style="text-indent: 50px;">
 
 
-										The Myo Armband comes equipped with a nine degreee of freedom IMU. 
-
-										 <span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/REALTIME_NODE.webm" type="video/mp4"></span>
+										The Myo Armband comes equipped with a nine degreee of freedom IMU. I chose to use the gyroscope data to control the position of certain Adroit Joints. Below is a photo of the Adroit with 
+										the labeled joints that were used, as well as a schematic of the Myo. To control Joint 1, I use the gyroscope data of the z-axis, to control Joint 3, I use the y-axis, and to control Joint 4 I use the x-axis. This
+										corresponds to the gyroscope changes that occur when the Myo is on the forearm. 
 										<br/>
 										<br/>
 
+										<span class="image right"><img src="assets/Adroit/Adroit_schematic.png" alt="" width="200" height="600" /></span>
+
+										<!-- <br/>
+										<br/> -->
+										<span class="image left"><img src="assets/Adroit/Myo.png" alt="" width="600" height="450" /></span>
+
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										
+
+										
+
+									
 
 									</p>
 									<p>
@@ -123,13 +147,13 @@
 								
 									
 
-	
+<!-- 	
 									<p>
 									The API also includes custom ROS2 messages and services that I created to make certain MoveIt service request messages easier to populate, and for calling
 									the actions and services without the need for the terminal. 
 
 				
-									</p>
+									</p> -->
 
 
 									<h2>Using the API</h2>
