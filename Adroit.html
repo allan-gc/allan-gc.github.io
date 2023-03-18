@@ -169,15 +169,15 @@
 									The Adroit was controlled using ROS 1 Noetic from within a Docker container. The Adroit already had the capabilty of being controlled via an Xbox controller using 
 									nodes from previously built packages. To control it with the Myo, I mapped the Xbox buttons and joystick commands to certain Myo gestures or IMU measurements. For example, 
 									moving the left joystick to the left would send a command to Joint 1 to move, and so I made it such that the gyroscope readings in the z-axis would act as the left joystick control 
-									for left and right movements. Below is a schematic of the ROS nodes and how they interact and interface the Myo with the Adroit. The blue nodes are the new ones corresponding to
+									for left and right movements. Below is a schematic of the ROS nodes and how they interact and interface the Myo with the Adroit. The Myo operates using bluetooth, so 
+									as long as the dongle is connected to the computer the stream of data will be passed into the ROS nodes, which then interact with the Adroit. The blue nodes are the new ones corresponding to
 									gesture prediction and IMU control, while the grey are the existing nodes that lay the foundation for interfacing and controlling thr Adroit with an Xbox controller. The Adroit gesture control 
 									node would all Myo data, meaning a predicted gesture and IMU stream. It would then act as a game controller by publishing joystick commands to the estabilished joystick node. The joystick node and the main Adroit 
 									control node would then send joint commands to the Adroit and recieve back information on the joint positions. 
 
-									<br/>
-									<br/>
+									
 
-									<span class="image fit2"><img src="assets/Adroit/Flowchart2.jpg" alt="" width="500" height="450" /></span>
+									<span class="image fit"><img src="assets/Adroit/Flowchart6.jpg" alt="" width="700" height="450" /></span>
 
 
 
