@@ -114,10 +114,7 @@
 
 										The Myo Armband comes equipped with a nine degreee of freedom IMU. I chose to use the gyroscope data to control the position of certain Adroit Joints. Below is a photo of the Adroit with 
 										the labeled joints that were used, as well as a schematic of the Myo. To control Joint 1, I use the gyroscope data of the z-axis, to control Joint 3, I use the y-axis, and to control Joint 4 I use the x-axis. This
-										corresponds to the gyroscope changes that occur when the Myo is on the forearm. Trying to control position of joints using gyroscope proved difficult since 
-										the gyroscope measurements began to drift over time, and because the orientation of the Myo would change slighly as it was on the forearm. This was the main
-										reason to add the recallibration gesture, which stops all control to the Adroit and allows the user to simply realign themselves with the arm and continue
-										using it. The video showcases this functionality.
+										corresponds to the gyroscope changes that occur when the Myo is on the forearm. 
 										<br/>
 										<br/>
 
@@ -149,7 +146,7 @@
 
 
 									</p>
-									<p>
+									
 
 								
 									
@@ -163,21 +160,33 @@
 									</p> -->
 
 
-									<h2>ROS Interface</h2>
-									<p style="text-indent: 50px;"></p>
+									<h2>System Pipeline and ROS Interface</h2>
+									<p style="text-indent: 50px;">
 									
-									The Adroit was controlled using ROS 1 Noetic from within a Docker container. The Adroit already had the capabilty of being controlled via an Xbox controller using 
-									nodes from previously built packages. To control it with the Myo, I mapped the Xbox buttons and joystick commands to certain Myo gestures or IMU measurements. For example, 
-									moving the left joystick to the left would send a command to Joint 1 to move, and so I made it such that the gyroscope readings in the z-axis would act as the left joystick control 
-									for left and right movements. Below is a schematic of the ROS nodes and how they interact and interface the Myo with the Adroit. The Myo operates using bluetooth, so 
-									as long as the dongle is connected to the computer the stream of data will be passed into the ROS nodes, which then interact with the Adroit. The blue nodes are the new ones corresponding to
-									gesture prediction and IMU control, while the grey are the existing nodes that lay the foundation for interfacing and controlling thr Adroit with an Xbox controller. The Adroit gesture control 
-									node would all Myo data, meaning a predicted gesture and IMU stream. It would then act as a game controller by publishing joystick commands to the estabilished joystick node. The joystick node and the main Adroit 
-									control node would then send joint commands to the Adroit and recieve back information on the joint positions. 
-
-									
+										The Myo operates via bluetooth to the computer and streams both IMU and EMG signals collected from the forearm.  The raw EMG and IMU data is fed into ROS nodes which handle the real time gesture classification
+										and IMU stream for interfacing with the Adroit. 
+										
+										The Adroit was controlled using ROS 1 Noetic from within a Docker container. 
+										The Adroit already had the capabilty of being controlled via an Xbox controller using 
+										nodes from previously built packages. To control it with the Myo, I mapped the Xbox buttons and joystick commands to certain Myo gestures or IMU measurements. For example, 
+										moving the left joystick to the left would send a command to Joint 1 to move, and so I made it such that the gyroscope readings in the z-axis would act as the left joystick control 
+										for left and right movements. Below is a schematic of the system pipeline and ROS nodes.  
 
 									<span class="image fit"><img src="assets/Adroit/Flowchart6.jpg" alt="" width="700" height="450" /></span>
+
+									<!-- <br/>
+									<br/> -->
+									
+									 The blue nodes are the new ones I created corresponding to
+									 gesture prediction and IMU control, while the grey are the nodes from previous Adroit packages that lay the foundation for interfacing and controlling the Adroit with an Xbox controller. The Adroit gesture control 
+									 node would take in all Myo data, meaning a predicted gesture and IMU stream. It would then act as a game controller by publishing joystick commands to the estabilished joystick node. The joystick node and the main Adroit 
+									 control node would then send joint commands to the Adroit and recieve back information on the joint positions. 
+
+									</p>
+
+									
+
+									<!-- <span class="image fit"><img src="assets/Adroit/Flowchart6.jpg" alt="" width="700" height="450" /></span> -->
 
 
 
@@ -187,6 +196,13 @@
 										While this project was successful in allowing for the control of the Adroit, the IMU control required the recallibration gesture due to its eventual inaccuracy. The pose estimation 
 										problem that comes with trying to use IMUs to detect the position of an object, in this case the Myo on the forearm, could definitely be looked into more in order to make the control 
 										more robust. 
+
+										<br/>
+										<br/>
+
+										It might also be interesting to incorporate different ML models for gesture control, and possiblly different gestures that correpond to grips and grasps as initially intended.
+
+
 
 									</p>
 
