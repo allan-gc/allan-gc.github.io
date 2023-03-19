@@ -90,9 +90,10 @@
 
 										The machine learning model used for this project was developed by Robert Schloen using PyTorch, so I will link to his project page <a href="https://rschloen.github.io/portfolio/2020/01/10/semg-control.html">here</a> for more details.
 										
-										 The model was trained on data from the <a href="http://ninaweb.hevs.ch/">Ninapro Database 5,</a>  which collected thousands of EMG samples using the same Myo Armbands that Robert and I used. The dataset contains data for many different gestures, 
-										 including flexion of each finger, different wrist movements, and different grasps. I ultimately chose to use the same gestures that Robert chose to train on, which included the flexion of the five fingers and a closed fist. This was primarily 
-										 because the model was not as accurate when trying to classify different grasp and wrists. Below is a video showing the real time classification of these gestures using the Myo Armband in a Python ROS node. 
+										 The model was trained on data from the <a href="http://ninaweb.hevs.ch/">Ninapro Database 5,</a>  which collected thousands of EMG samples using the Myo Armbands. The dataset contains data for many different gestures, 
+										 including flexion of each finger, different wrist movements, and different grasps. I ultimately chose to use gestures corresponding to the flexion of the five fingers and a closed fist. This was primarily 
+										 because the model was not as accurate when trying to classify different grasp and wrists. For better prediction of gestures, I had to collect a lot of my own data to then use transfer learning with the trained model. More 
+										 about that can be found on Robert's project page. Below is a video showing the real time classification of these gestures using the Myo Armband in a Python ROS node. 
 
 
 										 <span class="video fit2"><video width="800" height="600" controls loop src="assets/Adroit/REALTIME_NODE.webm" type="video/mp4"></span>
@@ -112,9 +113,9 @@
 									<p style="text-indent: 50px;">
 
 
-										The Myo Armband comes equipped with a nine degreee of freedom IMU. I chose to use the gyroscope data to control the position of certain Adroit Joints. Below is a photo of the Adroit with 
+										The Myo Armband comes equipped with a nine degreee of freedom IMU. I chose to use the gyroscope data to control the position of certain Adroit joints. Below is a photo of the Adroit with 
 										the labeled joints that were used, as well as a schematic of the Myo. To control Joint 1, I use the gyroscope data of the z-axis, to control Joint 3, I use the y-axis, and to control Joint 4 I use the x-axis. This
-										corresponds to the gyroscope changes that occur when the Myo is on the forearm. 
+										corresponds to the gyroscope changes that occur when the Myo is on the forearm. Those joints on the Adroit were chosen as I thought they resembled the natural movement of the human shoulder, elbow, and wrist the best.
 										<br/>
 										<br/>
 
