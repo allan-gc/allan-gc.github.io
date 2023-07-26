@@ -66,7 +66,7 @@
 									 <br/>
 									 <br/>
 
-									 For this project, a Franka Emika Panda robotic arm was used to autonomously make hot chocolate. To perceive the environment, the system utilizes an Intel D435i camera and AprilTags. Upon initial setup, a calibration process must be completed to intialize the robot's 
+									 In this project, a Franka Emika Panda robotic arm was used to autonomously make hot chocolate. To perceive the environment, the system utilizes an Intel D435i camera and AprilTags. Upon initial setup, a calibration process must be completed to intialize the robot's 
 									 end-effector frame to the other object frames in the scene. After this, the process consisted of using AprilTags to locate a scoop of cocoa, a mug, a spoon, and a kettle 
 									 relative to the robot. Next, using our custom MoveIt API for Python called 'movebot', the robot is able to perform path planning between all of these objects. It turns on the kettle, dumps 
 									 the cocoa powder into the mug, pours the hot water over the power, and stirs the mixture with a popsticle stick or spoon. 
