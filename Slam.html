@@ -46,7 +46,7 @@
 									<h1> EKF-SLAM on Turtlebot3<br />
 									</h1>
 								</header>
-                                <span class="image fit2"><img src="assets/BotChocolate/BotChocolate1.gif" alt="" /></span>
+                                <span class="image fit2"><img src="assets/SLAM/slam.gif" alt="" /></span>
 
 								<!-- Text stuff -->
 									<!-- <h2>Text</h2>
@@ -60,89 +60,52 @@
 									<h2>Overview</h2>
 									<p>
 										
+									 The EKF-SLAM was implemented on a Turtlebot3 using ROS2 and C++. The implementation utilizes wheel odometry and LiDAR data for the robot's state estimation, as well as 
+									 a differntial drive kinematics library for low level control of the robot. The entire SLAM control pipeline was simulated using Rviz and can be tested on the physical Turtlebot3. 
 
 									 <br/>
 									 <br/>
-
-									 The implemented EKF-SLAM algorithm can be seen above. 
-
+									 A video showing the final results of the implementation can be seen below.
+									 The blue robot reresents the odometry estimate, the green robot the SLAM estimate, and the red robot the simulated true 
+									 position of the robot. The cylinders represent obstacles on the map, and similarly green represents where the SLAM estimates the obstacles to be while the red is their simulated true position. 
+									 
 									 <br/>
 									 <br/>
-
-									 <!-- <b> Making Hot Chocolate (1.5x Speed)</b> -->
-
-									 Here is the Franka arm following the entire motion plan (at 1.5x speed):
-
 									</p>
 
 									<!-- <span class="video fit2"><video width="800" height="450" controls autoplay muted loop src="assets/BotChocolate/BotChocLQ.mp4" type="video/mp4"></span> -->
-									<span class="video fit2"><video width="800" height="450" controls loop src="assets/BotChocolate/BotChocolateSpedUp.mp4" type="video/mp4"></span>
+									<span class="video fit2"><video width="800" height="450" controls loop src="assets/SLAM/SLAM_VID.webm" type="video/mp4"></span>
 
         
 
-									<h2>MoveIt and ROS2 API</h2>
+									<h2>SLAM Pipeline</h2>
 
 									<p>
 
-									 My main role in this project was to integrate the MoveIt robot manipulation package and ROS2 Humble into a Python API for motion and path planning. The MoveIt package includes 
-									 many actions and services for motion planning and robot control. The API itself was created as a ROS2 node that contains the corresponding action
-									 and service clients. By doing so, the API can interact with the robot through the MoveIt actions and services.
+									 The pipeline is comprised of two main processes: state esitmation and obstacle perception. 
+									 
+									 For the state estimation, wheel odometry 
+									 estimates were used to make a prediction of the robot's state. This predication is further updated and refined with every obtacle that 
+									 the robot percieves through the LiDAR data. The wheel odometry and obstacle estimates result in a SLAM estimate which is much more accurate estimate of the robot's 
+									 state and location on the map. 
+									
+									 <br/>
+									 <br/>
+
+									 The obstacle perception for the SLAM updates utilizes real and simulated LiDAR data of the robot's surroundings. The first step in 
+									 using this data was to perform clustering of the LiDAR points of the cylindrical obstacles. Then, I implemented a circle fitting algorithm to fit a circle of a 
+									 certain radius to each cluster. A circle classification algorithm was then used to filter out the clusters that did not resemble circles. Lastly, I used data 
+									 association to prevent already detected obstacles from being added as new ones to the map. These steps would
+									 allow the robot to accurately detect the cylinderical obstacles in the environment and for the SLAM algorithm to create better state estimates and maps. 
+									 
+
+									</p>
+									
+						
+
+									<p><a href="https://github.com/allan-gc/ros2-ekf-slam"  class="logo"> View Project on Github</a></p>	
 								
 
-
-									</p>
-									
-									<p>
-
-									The biggest hurdle in integrating the MoveIt package into a ROS2 node was getting the action and service requests to be sent correctly such that a proper
-									response was generated. As a result, a large part of the API involves helper functions that fill in the request or goal messages that are sent to the 
-									action and service clients. The general workflow of the motion planning API is as follows:
-									</p>
-
-									<p>
-										<span class="image fit2"><img src="assets/BotChocolate/flowc.jpg" alt="" width="1200" height="130" /></span>
-									</p>
-									
-
-	
-									<p>
-									The API also includes custom ROS2 messages and services that I created to make certain MoveIt service request messages easier to populate, and for calling
-									the actions and services without the need for the terminal. 
-
-				
-									</p>
-
-
-									<h2>Using the API</h2>
-									<p> 
-									
-									Since there is much happening in the backend with 
-									all the action and service calls, one of the custom services and messages was created explcitly to make user input as simple as possible. This service allows 		
-									the user to generate motion plans by inputting start and goal poses in either Cartesian coordinates or joint angles. It also allows the user to choose whether 
-									they would want to 'plan' or 'plan and execute' their trajectory. 
-
-									</p>
-
-									<p>
-										For this project, we created another node that contained the entire motion plan for the Franka to make hot chocolate. This node used the 
-										movebot Python API services to interact with Moveit and the Franka arm, and it functioned as the main hub for all the motion plan
-										testing. After the entire motion plan was assembled and tested seperately, I created a service that would signal the Franka arm to begin moving
-										according to the motion plan. 
-
-									</p>
-
-									<p>
-										With our API, the Franka arm was able to successfully make cups of hot chocolate autonomously. Once it finished creating one cup, it was able
-										serve up another one with no issue or need for restarting any nodes or programs.
-										
-									</p>
-
-									<p><a href="https://github.com/allan-gc/Bot-Chocolate-ROS2"  class="logo"> View Project on Github</a></p>	
-								
-
-
-
-							
 
 							</section>
 
