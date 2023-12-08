@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+<html>
+	<head>
+		<title>Allan Garcia-Casal - Torque Control for Prosthetic Elbow </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Allan Garcia-Casal</a>
+						<h4> Northwestern University | MS in Robotics</h4>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Projects</a></li>
+							<li><a href="Resume.html">Resume</a></li>
+							<li><a href="About.html">About Me</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/allan-garcia-casal/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/allan-gc" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:allang@u.northwestern.edu" class="icon solid fa-envelope" ><span class="label">Email</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Torque Control for Prosthetic Elbow <br />
+									</h1>
+								</header>
+                                <span class="video fit2"><video width="800" height="600" controls  src="assets/Elbow/08ms_test.mp4" type="video/mp4"></span>
+
+									
+									<h2>Overview</h2>
+									<p style="text-indent: 50px;">
+									 	For my final project as part of Northwestern's Master's in Robotics, I designed a motorized prosthetic elbow system that can aid upper limb amputees maintain balance while walking.
+                                        The motivation behind this project stems from research indicating that upper limb amputees may have higher risk of falling due to the imbalance in upper body mass [1]. The system attempts
+                                        to prevent such falls by analyzing the user's walking speed and adjusting the arm swing motion accordingly. 
+                                        <br/>
+                                        <br/>
+                                        This project is building off of previous works that have completed some parts of the puzzle, which includes the electrical/mechanical design of the elbow and the modeling of the arm swing motions. The main
+                                        goal of my project was to integrate all the current pieces into one working system capable of real time detection and adjustment. To do this I decided to use the Zephyr real time operating system with a Teensy 4.1 
+                                        microcontroller, a PI torque control system, and step detection algorithm. 
+
+									
+									 <br/>
+									 <br/>
+
+									 <!-- Here is a video showcasing the basic functionality of the system, including the completion of some more difficult tasks. The video labels the sections that are sped up. -->
+
+									</p>
+
+									<!-- <span class="video fit2"><video width="800" height="600" controls  muted src="assets/Adroit/FINAL_VID2_FINAL.mp4" type="video/mp4"></span> -->
+
+
+									<h2> Mechanical Design</h2>
+
+									<p style="text-indent: 50px;">
+                                        The elbow design is based off of <a href="https://www.spsco.com/hosmer-e-400.html">Fillauer's E-400 prosthetic elbow  </a> . A previous group designed the elbow and motor housings, but
+                                         I had to modify the motor housings slightly since I changed the motor to one that was slightly larger with a higher rated torque (3.4 Nm as compared to 1.65 Nm). The final elbow design remained 
+                                        nearly the same since it is following the Fillaeur design which is meant to fit into a custom sized forearm prosthetic. I also made a PCB and a housing for it 
+                                        that can be strapped to someones elbow. A photo of the final system is seen below. 
+										<span class="image left"><img src="assets/Elbow/Elbow_Alone.jpg" alt="" width="200" height="600" /></span>
+                                        <span class="image right"><img src="assets/Elbow/Elbow_Full.jpg" alt="" width="200" height="600" /></span>
+
+
+                                        <br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+                                        <br/>
+										
+										
+                                        The motor selection is arguably the most important decision in this mechanism. To select a motor with the necessary torque, I used a motor selection script developed by Yael Shalom, a previous student who worked
+                                        on this project. Yael created a model for the swing of an elbow that calculated the required output torques for the system, and as such gave the required torque for the motor. Her script looked at the torque/speed curves of the motors compared to
+                                        the calculated torques for arm swings of different walking speeds. If the torque speed curves are above the calculated torques, it is a viable motor. 
+                                        <span class="image fit"><img src="assets/Elbow/Torque_Speed_Curves.png" alt="" width="700" height="600" /></span>
+                                        
+                                        The results of the motor selection script show that the previous motor being used was not able to clear a good amount of calculated torques. The new motor being used clears almost the 
+                                        entire range of calculated torques with its nominal voltage and does clear all of them when used at max 8.0 volts.
+                                        <br/>
+										<br/>
+
+									</p>
+									
+									<h2> Electrical Design</h2>
+
+									<p style="text-indent: 50px;">
+
+                                        The same group who designed the elbow also designed much of the foundation for the circuitry. The final circuit diagram can be seen below. The main components include an IMU for
+                                        acceleration measurements, a current sensor for the torque control loop, and a motor driver.
+                                        <span class="image fit"><img src="assets/Elbow/CIRCUIT.png" alt="" width="700" height="450" /></span>
+
+										<br/>
+                                        The only (and major) change to the circuit was switching out their Adafruit Pro-Trinket with a Teensy 4.1 to gain more processing speed and storage. With this came the addition of two 
+                                        voltage regulators, one to ensure 8V (max operating voltage of the motor) to the motor driver and another to bring the voltage down to 5V for the Teensy and all the other chips. I designed a PCB
+                                        for the circuit to try to keep it as compact as possible. The final circuit is powered by an 11.1V 3S LiPo. 
+                                        <br/>
+										<span class="image right"><img src="assets/Elbow/PCB.jpg" alt="" width="200" height="600" /></span>
+
+										<!-- <br/>
+										<br/> -->
+										<span class="image left"><img src="assets/Elbow/PCB_FULL.jpg" alt="" width="200" height="600" /></span>
+                                        <br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+									</p>
+									
+									<h2>Control System </h2>
+									<p style="text-indent: 50px;">
+									
+										The goal of the system is to output the required torque for a particular arm swing motion based on the person's walking speed. To accomplish this, I used torque profiles 
+                                        that Yael generated from her arm motion model (<a href="https://yaelbenshalom.github.io/motorized_prosthetic_arm/index.html">Here </a> is a link to her work for more info). These output torques 
+                                        were generated for different walking speeds and are used as the main input for the control loop. 
+
+                                        <span class="image fit"><img src="assets/Elbow/Control_Systems_Diagram.png" alt="" width="700" height="550" /></span>
+
+
+                                        The idea behind the control system is that the user's steps will determine their walking speed and thus determine their torque profile. This torque profile will then be converted to 
+                                        a current and fed into the current control loop. The current control loop will calculate an output torque using a PI controller and send that to the motor. The IMU data is continually being collected, but the number
+                                        of steps is only calculated for a specified window (every 5 seconds). If the number of steps changes due to a change in walking speed, the appropriate profile would be selected. 
+                                        <br/>
+									    <br/>
+                                        One issue that became apparent from trying to follow the torque profiles was that the arm would not swing back down when a smaller torque was being applied. When a smaller torque was applied
+                                        the arm would remain held in place, and you would be able to push it down manually with little resistance. This seems to be caused by the large gear ratio (1:373) of the motor
+                                        I chose. The large gear ratio essentially dissipates the effects of the smaller torque before it reaches the forearm, and as such does not cause it to swing down by itself. To fix this issue,
+                                        I decided to add more torques both to the upward and downward swings of the arms using the following formula:     $$ {T_{addition} = max(abs(T_{profile}))*scale} $$
+
+                                        This formula scales the torques based on the max torques of that profile. This torque addition would then be added to the output torques of the current control loop, making any torque in the positive direction more positive and any in the negative direction more negative.
+                                        <br/>
+									    <br/>
+                                        Another issue with using the torque profiles was that most of the profiles consisted of all negative values. Given the problem we just discussed with the motor, a lower negative value
+                                        would not cause the arm to swing down. To use my solution above, I had to find the direction of the swing based off of the direction of the torque profile. Luckily, Yael's profiles
+                                        were calculated using motor position over time, and so to solve this issue I created acceleration profiles using the position data. The acceleration profiles would have directionality and allow me to 
+                                        determine which direction the output torque should be in. Below you can see plots of reference and output torques, and reference and output accelerations. It is much easier to judge 
+                                        the performance of the arm motion when using the acceleration profiles, and so that is the metric I used for comparing test results.
+
+                                        <span class="image fit"><img src="assets/Elbow/OutputTorque_05ms_BEST2.png" alt="" width="250" height="550" /></span>
+                                        <span class="image fit"><img src="assets/Elbow/OutputAccel_05ms_Best.png" alt="" width="700" height="550" /></span>
+			
+
+									<h2>Zephyr Software Development</h2>
+
+									<p style="text-indent: 50px;">
+										All of the software for the project was developed using the Zephyr real time operating system (RTOS). Zephyr allows for simple communication with hardware with its mulitple
+                                        APIs and device tree hardware abstraction system. It also allows users to easily set up mulithreading applications that need multiple streams of information to run in real time, which is 
+                                        the main reason why I chose to use it. It also already had support and examples for almost all the hardware I was using, such as a libary for the MPU6050 IMU, INA219 current sensor, and  Teensy 4.x
+                                        support (although very scarce).
+
+										<br/>
+										<br/>
+                                        To implement the control system, I first created utility libraries for the Zephyr sensor API and other functions. I then created threads for all the streams of information that I needed. This included 
+                                        separate threads for the sensors, the motor encoder, the motor control signals, and the current control loop. I created a thread for the torque profiles as well because I decided to 
+                                        save them as arrays that essentially get published when selected. After creating the threads I synchronized them as follows: the current control, motor control, IMU sensor, and encoder readings are all running at 1 KHz, the torque 
+                                        profiles run at 100 Hz, and the current sensor runs at 200 Hz. 
+                                        
+                                        <br/>
+										<br/>
+                                        I tried to follow the structure of the control systems diagram as closely as possible when creating threads and sending information between them. For instance, I could implement my step detection 
+                                        algorithm either in the IMU sensor thread or in the torque profile thread. However, the torque profiles should just recieve the step count and proceed rather than deal with the 
+                                        functional overhead of grabbing the data and processing it. This seemed to help in synchronizing the threads better since only one step value was being sent out. 
+                                           
+                                        <h3>Step Detection and Torque Selection Algorithm</h3>
+                                        The mapping between step detection and the torque profile involved a lookup table style system. The step detection algorithm takes in the filtred IMU signals and counts the number of 
+                                        peaks detected. It does so by filtering out values based on the magnitude of the highest peaks and by how frequent a peak is detected. This allows for the algorithm to not count smaller local 
+                                        maxima and to avoid noise at higher peaks if it already counted a peak close by. I tested by algorithm by walking on a treadmill at two different speeds and plotting the filtered signal. 
+
+
+                                        <span class="image fit"><img src="assets/Elbow/05ms_IMU.png" alt="" width="250" height="750" /></span>
+                                        <span class="image fit"><img src="assets/Elbow/08ms_IMU.png" alt="" width="250" height="750" /></span>
+
+                                        For the 0.5 m/s speed, the step count was 3, and for the 0.8 m/s, the step count was 9. I did many trials like this to determine the average steps that correspond to each walking speed. I determined that 
+                                        for my gait, 0.5 m/s corresponds to 4 steps and 0.8 m/s corresponds to 10 steps within the 5 second sampling window. If no steps are detected, no profile is selected and the arm stops swinging. When selecting the torque profile, I give a +/- 1 range on the 
+                                        recieved steps to get a better reading on steps over time.
+
+                                        <h3>Zephyr Development with Teensy 4.1</h3>
+                                        As mentioned above Zephyr had very scarce support for the Teensy 4.1. Their own flashing system does not currently support Teensy 4.1 as of the time when this post is being uploaded, and there was no 
+                                        documentation on how to use certain basic pins such as ADC and PWM. After digging through a lot of hidden documentation and sources for the processor that the Teensy 4.1 uses I was able 
+                                        to gain almost full control of Teensy 4.1 with Zephyr. This includes PWM, ADC, SD read/write, GPIO, I2C, and SPI. I will make another post talking about the device tree overlay, the necessary 
+                                        configs, and most importantly the documentation that helped me figure out the proper syntax and values for these pins to work with the chip. 
+
+                                        
+									</p>
+                                    
+                                    <h2>Testing and Results</h2>
+									<p style="text-indent: 50px;">
+                                        To test the fully integrated system, I walked on the treadmill at two different speeds of 0.5 m/s and 0.8 m/s to test the responsiveness to each individual speed. 
+                                        Here is a video of the arm swinging with me as I walk at a speed of 0.5 m/s. I start off with no motion to show that the arm is stationary and then it begins 
+                                        to swing once I am walking. 
+
+                                        <span class="video fit2"><video width="800" height="600" controls  src="assets/Elbow/05ms_test.mp4" type="video/mp4"></span>
+
+
+                                        Here is a plot showing the resulting acceleration of the arm compared to the reference acceleration.
+
+                                        <span class="image fit"><img src="assets/Elbow/OutputAcceleration_0.010_0.010.png" alt="" width="250" height="550" /></span>
+
+                                        From this data it seems that the arm was able to follow the reference accelerations closely. The arm swings seem to be out of phase which is 
+                                        something I notice gets worse as the profile keeps going. This might be due to a synchronization issue with the motor control loop that is not 
+                                        letting it switch direction commands fast enough. Despite this, the arm seems to follow the correct trajectory, and seems to swing on most of the 
+                                        right steps throughout the video. 
+                                        
+                                        <br/>
+										<br/>
+
+                                        I then tested the 0.8 m/s walk. 
+
+                                        <span class="video fit2"><video width="800" height="600" controls  src="assets/Elbow/08ms_test.mp4" type="video/mp4"></span>
+
+
+                                        And the resulting acceleration plots.
+
+                                        <span class="image fit"><img src="assets/Elbow/Output_08ms_BEST.png" alt="" width="250" height="550" /></span>
+
+                                        The lagging issue with the 0.8 m/s profile is much more pronounced than the 0.5 m/s profile. The output acceleration magnitudes also seem 
+                                        to decrease at 5 seconds despite matching closely for the seconds before. The arm however seems to swing as intended in the video, so it may be possible 
+                                        that the data collection itself introduces some lag. 
+                                        
+                                        <br/>
+										<br/>
+                                        As a last test, I wanted to test the responsiveness of the system when switching between speeds. 
+                                        The goal was to start at one speed and change to the next one. The video below shows the arm swinging with me as I walk from 0.5 
+                                        m/s to 0.8 m/s. 
+
+                                        <span class="video fit2"><video width="800" height="600" controls  src="assets/Elbow/SwitchTest.mp4" type="video/mp4"></span>
+
+                                        The responsiveness of the system decreased quite a bit when trying to detect different steps and selecting different profiles. From the video it can be seen 
+                                        that the system does eventually respond to the change in walking speed and outputs the right profile, but it does take it a couple of seconds to do so. I think the main 
+                                        cause for this is my step detection algorithm. The algorithm is being used with the low pass filter in place of using an FFT to check the frequency of the 
+                                        signals mainly because an FFT was taking too long to run in real time. Making the algorithm more efficient at detecting peaks or getting a smoother signal might help
+                                        detect the steps better without the need for an FFT. 
+										
+									</p>
+
+                                    <h2>Future Considerations</h2>
+									<p style="text-indent: 50px;">
+                                        There are a couple of improvements that can be made for this project to become a more responsive integrated system. 
+                                        <br/>
+                                        1. Picking a motor with a much smaller gear ratio would allow for the torque profiles to be used more directly. This could lead to better results since there will be no need for scaling the torques. 
+                                        <br/>
+                                        2. The walking speed/step detection algorithm was developed due to how slow the FFT calculations were running in real time. Further research into a better FFT library, or how to use 
+                                        any FFT library more efficiently would greatly benefit the step counting portion of the system. If not, a better filter for the IMU signals alone would help the current algorithm. 
+                                        <br/>
+                                        3. As of now the torque profiles are stored in arrays and then sent out in a for loop when the torque profile thread detects a corresponding step count. Moving away From
+                                        the lookup table style might also give the system better responsiveness when switching between speeds in real time. 
+                                        
+                                    </p>
+
+                                    <h2>Rerferences</h2>
+                                    [1] Kent JA, Major MJ. Asymmetry of mass and motion affects the regulation of whole-body angular momentum in individuals with upper limb absence. Clin Biomech, 2020
+                                    <br/>
+                                    <br/>
+									<p><a href="https://github.com/allan-gc/prosthetic_swing_control"  class="logo"> View Project on Github</a></p>	
+								
+
+
+
+							
+
+							</section>
+
+					</div>
+
+               
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Allan Garcia-Casal </li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
