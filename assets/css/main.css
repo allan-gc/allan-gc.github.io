@@ -2059,7 +2059,71 @@ input, select, textarea {
 	.box {
 		border-color: #eeeeee;
 	}
+	 /* Style the button that is used to open and close the collapsible content */
 
+
+	 .menu-content {
+		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		padding: 0 0 20px;
+	  }
+	  
+	  /* .collapsable-menu {
+		padding: 0px 30px;
+		border-bottom: 1px solid #CDE700;
+		box-shadow: 1px 2px 3px;
+	  } */
+	  
+	  .collapsable-menu ul {
+		list-style-type: none;
+		padding: 0;
+	  }
+	  
+	  /* .collapsable-menu a {
+		display: block;
+		padding: 10px;
+		text-decoration: none;
+		font-size: 20px;
+	  } */
+	  
+	  .collapsable-menu label {
+		  font-family: 'Sedgwick Ave Display', cursive;
+		  font-size: 40px;
+		  display: block;
+		  cursor: pointer;
+		  /* background: url(menu.png) no-repeat left center; */
+		  /* padding: 10px 0 10px 50px; */
+	  }
+	  
+	  .menu-content {
+		  max-height: 0;
+		  overflow: hidden;
+		  font-family: 'inherit', sans-serif; 
+		  padding: 0 0 0 50px;
+	  }
+	  
+	  input[type="checkbox"]{
+		visibility:hidden;
+		position:absolute;
+	  }
+	  input {
+		display: none;
+	  }
+	  
+	  input:checked {
+		display: none;
+	  }
+	  
+	  /* Toggle Effect */
+	  input:checked ~ label {
+		  /* background-image: url(close.png); */
+		  display: none;
+	  }
+	  input:checked ~ .menu-content {
+		  max-height: 100%;
+	  }
+	  /*
+	  
+	  
 /* Button */
 
 	input[type="submit"],
@@ -2680,6 +2744,13 @@ input, select, textarea {
 			top: 0.4rem;
 		}
 
+		.image.center3 {
+			float: center;
+			margin: 0 0 1.0rem 8rem;
+			/* top: 0.4rem; */
+			width: 100%;
+		}
+
 		.image.right {
 			float: right;
 			width: 45.0%;
@@ -2713,6 +2784,7 @@ input, select, textarea {
 			.image.fit img {
 				width: 100%;
 			}
+			
 
 		.image.main {
 			display: block;
