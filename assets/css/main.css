@@ -2064,6 +2064,8 @@ input, select, textarea {
 
 	 .menu-content {
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		font-weight: 400;
+		
 		padding: 0 0 20px;
 	  }
 	  
@@ -2081,13 +2083,14 @@ input, select, textarea {
 	  /* .collapsable-menu a {
 		display: block;
 		padding: 10px;
-		text-decoration: none;
 		font-size: 20px;
 	  } */
 	  
 	  .collapsable-menu label {
 		  font-family: 'Sedgwick Ave Display', cursive;
-		  font-size: 40px;
+		  font-weight: bold;
+		  text-decoration: underline;
+		  font-size: 80px;
 		  display: block;
 		  cursor: pointer;
 		  /* background: url(menu.png) no-repeat left center; */
@@ -2686,7 +2689,7 @@ input, select, textarea {
 
 
 			display: block;
-			margin: 0 2rem;
+			margin: 0rem 2rem;
 			width: 90%;
 		}
 
@@ -2758,7 +2761,7 @@ input, select, textarea {
 		  }
 		.image.fit2 {
 			display: block;
-			margin: 0 6rem;
+			margin: 0 10rem;
 			width: 60%;
 			
 		}
@@ -2768,6 +2771,21 @@ input, select, textarea {
 			}
 
 			.image.fit2 img {
+				width: 100%;
+			}
+
+		.image.fit3 {
+			display: block;
+			margin: 0 6rem;
+			width: 60%;
+			
+		}
+
+			.image.fit3:first-child {
+				margin-top: 0;
+			}
+
+			.image.fit3 img {
 				width: 100%;
 			}
 
